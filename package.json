@@ -6,7 +6,7 @@
   "description": "Учебная лаборатория ИИ: телефон, рука и тетрадь прямо в браузере",
   "scripts": {
     "start": "node scripts/serve.mjs",
-    "test": "node --test --test-isolation=none tests/classifier.test.mjs",
+    "test": "node tests/classifier.test.mjs",
     "test:browser": "node scripts/serve.mjs --test",
     "check": "node --check dist/app.js && node --check dist/classifier.js && node --check scripts/serve.mjs",
     "assets": "node scripts/download-assets.mjs"
