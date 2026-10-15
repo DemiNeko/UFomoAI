@@ -1,0 +1,23 @@
+Научи ИИ — third-party software and model attribution
+
+TensorFlow.js 4.22.0
+Copyright Google LLC and TensorFlow.js contributors.
+License: Apache License 2.0; full text: ./vendor/LICENSE-APACHE-2.0.txt
+Source: https://github.com/tensorflow/tfjs
+Distribution: https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.22.0/dist/tf.min.js
+
+MobileNet v1, width multiplier 0.50, input 224 x 224
+Pretrained on ImageNet; distributed by the TensorFlow.js project.
+Copyright Google Inc. / Google LLC and contributors.
+License: Apache License 2.0; full text: ./vendor/LICENSE-APACHE-2.0.txt
+Model and weight source:
+https://storage.googleapis.com/tfjs-models/tfjs/mobilenet_v1_0.50_224/model.json
+Reference: https://github.com/tensorflow/tfjs-examples/tree/master/webcam-transfer-learning
+Original research: https://arxiv.org/abs/1704.04861
+
+The original model weights are unchanged. The application uses the
+conv_pw_13_relu activations and spatial average pooling to produce 512
+features, followed by a separate cosine-similarity kNN classifier.
+No ImageNet training images are included.
+
+Local asset checksums are in ./asset-hashes.json.

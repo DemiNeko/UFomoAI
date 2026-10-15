@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#163d35">
+  <meta name="description" content="Научи искусственный интеллект различать телефон, руку и тетрадь. Интерактивная лаборатория машинного обучения прямо в браузере.">
+  <title>Научи ИИ — твоя маленькая AI-лаборатория</title>
+  <link rel="icon" href="./favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./styles.css">
+  <script defer src="./vendor/tf.min.js"></script>
+  <script type="module" src="./app.js"></script>
+</head>
+<body>
+  <svg class="svg-library" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs>
+    <symbol id="i-phone" viewBox="0 0 24 24"><rect x="6" y="2" width="12" height="20" rx="3"/><path d="M10 5h4M11 18h2"/></symbol>
+    <symbol id="i-hand" viewBox="0 0 24 24"><path d="M8 12V5a1.5 1.5 0 0 1 3 0v6-8a1.5 1.5 0 0 1 3 0v8-6a1.5 1.5 0 0 1 3 0v7-4a1.5 1.5 0 0 1 3 0v7c0 4-2.5 7-6.5 7-2.5 0-4-1-5.5-3l-5-6a1.7 1.7 0 0 1 2.5-2.2L8 13"/></symbol>
+    <symbol id="i-notebook" viewBox="0 0 24 24"><rect x="5" y="3" width="15" height="18" rx="2"/><path d="M9 3v18M3 7h4M3 12h4M3 17h4M12 8h5M12 11h4"/></symbol>
+    <symbol id="i-camera" viewBox="0 0 24 24"><path d="M8 5l1.5-2h5L16 5h4a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z"/><circle cx="12" cy="12" r="4"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4 12h16m-6-6 6 6-6 6"/></symbol>
+    <symbol id="i-upload" viewBox="0 0 24 24"><path d="M12 16V3m-5 5 5-5 5 5M4 16v5h16v-5"/></symbol>
+    <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 3v13m-5-5 5 5 5-5M4 16v5h16v-5"/></symbol>
+    <symbol id="i-spark" viewBox="0 0 24 24"><path d="m12 2 2.8 7.2L22 12l-7.2 2.8L12 22l-2.8-7.2L2 12l7.2-2.8z"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path d="m12 2 8 3v6c0 5-4 9-8 11-4-2-8-6-8-11V5zM8 12l3 3 5-6"/></symbol>
+  </defs></svg>
+  <header class="header shell">
+    <a class="brand" href="#"><img src="./favicon.svg" width="38" height="38" alt=""><span>Научи ИИ<span class="brand-dot">.</span></span></a>
+    <nav aria-label="Главная навигация"><a class="nav-active" href="#lab">Лаборатория</a><a href="#how">Как это работает</a><button class="text-button" id="defense-open">Для защиты <span aria-hidden="true">↗</span></button></nav>
+    <span class="header-tag"><span class="live-dot"></span> Маленький проект. Настоящий ИИ.</span>
+  </header>
+  <main class="shell">
+    <section class="hero">
+      <div><div class="eyebrow"><span></span> ЭКСПЕРИМЕНТ № 01 · КОМПЬЮТЕРНОЕ ЗРЕНИЕ</div><h1>Покажи. Обучи.<br><span>Удивись.</span></h1><p class="hero-copy">Телефон, рука или тетрадь? Научи искусственный интеллект<br class="desktop-break"> отличать их — на своих примерах, прямо здесь.</p></div>
+      <div class="hero-aside"><div class="object-stack" aria-hidden="true"><div class="object-tile peach"><svg><use href="#i-phone"/></svg></div><div class="object-tile lilac"><svg><use href="#i-hand"/></svg></div><div class="object-tile mint"><svg><use href="#i-notebook"/></svg></div><div class="orbit-star">✳</div></div><p>Три привычные вещи.<br>Твой первый эксперимент с ИИ.</p></div>
+    </section>
+    <div class="lab-toolbar" id="lab"><div class="section-label">ТВОЯ ЛАБОРАТОРИЯ <span>v.01</span></div><div class="file-actions"><button id="import-button" class="text-button"><svg><use href="#i-upload"/></svg>Загрузить набор</button><button id="export-button" class="text-button" disabled><svg><use href="#i-download"/></svg>Сохранить набор</button><input type="file" id="import-input" accept="application/json,.json" hidden></div></div>
+    <ol class="steps" aria-label="Этапы эксперимента"><li id="step-1" class="active"><span>01</span><div>Собери примеры<small>Покажи предметы камере</small></div><b aria-hidden="true">→</b></li><li id="step-2"><span>02</span><div>Обучи классификатор<small>Пусть ИИ найдёт сходства</small></div><b aria-hidden="true">→</b></li><li id="step-3"><span>03</span><div>Проверь результат<small>Покажи новый ракурс</small></div></li></ol>
+    <div id="notice" class="notice" role="status" aria-live="polite" hidden></div>
+    <section class="workspace" aria-label="Рабочая область">
+      <div class="samples-panel"><div class="panel-heading"><h2>Обучающие примеры</h2><span class="small-tag" id="total-count">0 кадров</span></div><p class="panel-intro">Собери по 20–40 разных кадров на класс.<br>Или добавь свои фотографии.</p><div id="class-cards"></div><p class="tip"><span>↗</span> Меняй ракурс и расстояние. Разные примеры важнее одинаковых.</p></div>
+      <div class="vision-panel">
+        <div class="panel-heading"><h2>Взгляд ИИ</h2><span class="camera-state" id="camera-state"><span></span> Камера выключена</span></div>
+        <div class="camera-stage" id="camera-stage"><video id="webcam" autoplay playsinline muted hidden></video><img id="test-preview" alt="Изображение для проверки" hidden><div class="camera-placeholder" id="camera-placeholder"><div class="camera-glyph"><svg><use href="#i-camera"/></svg><span>✦</span></div><h3>Всё начинается<br>с одного кадра</h3><p>Включи камеру и покажи<br>что-нибудь из трёх категорий.</p><button id="camera-start" class="button primary"><svg><use href="#i-camera"/></svg>Включить камеру</button><small>Браузер попросит разрешение</small></div><div class="viewfinder" aria-hidden="true"><i></i><i></i><i></i><i></i></div><div class="stage-badge" id="stage-badge" hidden><span class="live-dot"></span><span id="stage-label">Камера готова</span></div><div class="capture-overlay" id="capture-overlay" hidden></div></div>
+        <div class="camera-controls"><span class="privacy-line"><svg><use href="#i-shield"/></svg>Кадры остаются в браузере</span><button id="camera-stop" class="text-button" hidden>Выключить</button><button id="camera-restart" class="text-button" hidden>Включить камеру</button></div>
+        <select id="camera-select" aria-label="Выбор камеры" hidden></select>
+        <div class="model-state"><span class="status-orb" id="model-orb"></span><span id="model-status">Нейросеть загрузится при первом действии</span><button id="retry-model" class="text-button" hidden>Повторить</button></div>
+      </div>
+      <div class="results-panel"><div class="panel-heading"><h2>Результат</h2><svg class="result-spark"><use href="#i-spark"/></svg></div><div class="prediction-empty" id="prediction"><div class="prediction-symbol">?</div><span class="eyebrow">ЧТО В КАДРЕ?</span><h3 id="prediction-title">Пока не знаю</h3><p id="prediction-detail">Добавь примеры каждого класса<br>и обучи свой классификатор.</p></div><div id="score-bars" class="score-bars"></div><p class="score-note">Доля голосов 5 ближайших примеров.<br>Это не измеренная точность модели.</p><div class="training-box"><div class="training-progress"><span id="training-progress-label">Готово 0 из 3 классов</span><span id="training-count">0 / 15</span></div><div class="track"><span id="training-track"></span></div><button class="button primary full" id="train-button" disabled><svg><use href="#i-spark"/></svg>Обучить классификатор</button><p id="train-hint">Для начала — минимум 5 кадров на класс.</p></div><button class="button outline full" id="predict-button" disabled>Начать распознавание <svg><use href="#i-arrow"/></svg></button><button class="text-button test-photo" id="test-button" disabled><svg><use href="#i-upload"/></svg>Проверить на фотографии</button><input id="test-input" type="file" accept="image/*" hidden><p class="latency" id="latency"></p></div>
+    </section>
+    <section class="how-section" id="how"><div class="how-heading"><div><div class="eyebrow">БЕЗ МАГИИ. С НЕМНОЖКОМ МАТЕМАТИКИ.</div><h2>Что происходит внутри?</h2></div><span class="outline-tag">MobileNet + kNN</span></div><div class="explain-grid"><article><span class="explain-number">01 / ДАННЫЕ</span><h3>Ты задаёшь примеры</h3><p>Показываешь предмет и говоришь, что это. Так появляется размеченный набор: изображения с правильными ответами.</p></article><article><span class="explain-number">02 / ПРИЗНАКИ</span><h3>Нейросеть видит сходства</h3><p>Готовая MobileNet превращает каждый кадр в 512 чисел. Они описывают визуальные признаки, а не просто цвет пикселей.</p></article><article><span class="explain-number">03 / РЕШЕНИЕ</span><h3>Ближайшие соседи голосуют</h3><p>Алгоритм kNN находит 5 самых похожих примеров. Класс, набравший больше голосов, становится ответом.</p></article></div><div class="honest-note"><svg><use href="#i-spark"/></svg><p><strong>А если ИИ ошибается?</strong> Это тоже часть эксперимента. Добавь другие ракурсы и фоны. Модель знает только три класса: незнакомый предмет она иногда примет за один из них. Веса MobileNet здесь не меняются — обучается классификатор на твоих примерах.</p></div></section>
+    <footer><a class="brand" href="#"><img src="./favicon.svg" width="26" height="26" alt=""><span>Научи ИИ.</span></a><span>Учебный проект по искусственному интеллекту</span><a href="./THIRD_PARTY_NOTICES.txt" target="_blank" rel="noopener">Технологии и лицензии ↗</a></footer>
+  </main>
+  <dialog id="defense-dialog"><div class="dialog-header"><span class="eyebrow">ШПАРГАЛКА ДЛЯ ЗАЩИТЫ</span><button id="defense-close" class="icon-button" aria-label="Закрыть">×</button></div><h2>Объясни проект<br>за две минуты.</h2><p class="dialog-lead">«Я сделал приложение, которое учится отличать телефон, руку и тетрадь по примерам пользователя».</p><ol class="defense-list"><li><strong>Задача</strong><p>Классификация изображения: один кадр → один из трёх классов.</p></li><li><strong>Данные и алгоритм</strong><p>Собираем разные примеры. MobileNet выделяет 512 признаков, затем kNN сравнивает их по косинусному сходству и выбирает класс голосованием 5 соседей.</p></li><li><strong>Показ</strong><p>Загрузи сохранённый набор или собери по 20 кадров. Нажми «Обучить классификатор», затем «Начать распознавание». Покажи предметы под новыми углами.</p></li><li><strong>Проверка и ограничения</strong><p>Сделай 10 новых показов каждого класса и посчитай правильные ответы из 30. Не проверяй на тех же кадрах, на которых учил. Голоса соседей не равны точности на новых данных.</p></li></ol><div class="dialog-note">Обучение с учителем · Перенос признаков · kNN · Компьютерное зрение<br>HTML, CSS, JavaScript, TensorFlow.js. Всё вычисляется в браузере.</div><button id="defense-done" class="button primary full">К эксперименту <svg><use href="#i-arrow"/></svg></button></dialog>
+  <noscript><div class="notice">Для работы лаборатории включи JavaScript в браузере.</div></noscript>
+</body>
+</html>
